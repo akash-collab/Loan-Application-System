@@ -14,7 +14,7 @@ export default function MainLayout({ children }: { children: ReactNode }) {
   return (
     <div className="h-screen flex flex-col bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100">
       {/* Navbar */}
-      <header className="bg-white dark:bg-gray-800 shadow-md px-6 py-4 flex justify-between items-center z-50 flex-shrink-0">
+<header className="bg-gradient-to-r from-indigo-700 to-purple-700 dark:from-gray-900 dark:to-gray-800 shadow-md px-6 py-4 flex justify-between items-center z-50 flex-shrink-0 text-white">
         <h1 className="text-xl font-bold text-indigo-600 dark:text-indigo-400">
           💼 Loan App
         </h1>
@@ -62,7 +62,7 @@ export default function MainLayout({ children }: { children: ReactNode }) {
       </div>
 
       {/* Footer */}
-      <footer className="bg-white dark:bg-gray-800 text-center py-4 text-xs text-gray-500 dark:text-gray-400 flex-shrink-0">
+<footer className="bg-gradient-to-r from-indigo-700 to-purple-700 dark:from-gray-900 dark:to-gray-800 text-center py-4 text-xs text-white">
         © {new Date().getFullYear()} Loan App. All rights reserved.
       </footer>
 
