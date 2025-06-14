@@ -19,6 +19,16 @@ Click here to visit Repo
 [Visit the Github Repo](https://github.com/akash-collab/Loan-Application-System)
 
 ⸻
+
+🌐 Video Link
+
+Click here to visit Repo
+
+[Visit the Youtube Video](https://github.com/akash-collab/Loan-Application-System)
+
+⸻
+
+
 📋 Demo Account
 
 Use this free account to test the app:
