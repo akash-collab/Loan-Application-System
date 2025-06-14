@@ -5,8 +5,9 @@ import RepaymentCalendar from "./RepaymentCalendar";
 import LoanDashboard from "./loanDashboard";
 import MainLayout from "../../layouts/MainLayout";
 import StatusNotifier from "../../components/StatusNotifier";
-
+import useLoanCount from "../../hooks/useLoanCount";
 export default function Dashboard() {
+  const hasLoans = useLoanCount();
   return (
     <MainLayout>
       <div className="relative h-full bg-gray-900 text-white flex flex-col">
@@ -22,7 +23,7 @@ export default function Dashboard() {
         {/* Scrollable section below */}
         <div className="flex-1 overflow-y-auto px-4 mt-4">
           <div className="max-w-4xl mx-auto space-y-6 pb-6">
-            <LoanDashboard />
+            {hasLoans && <LoanDashboard />}
             {/* <RepaymentCalendar /> */}
           </div>
         </div>

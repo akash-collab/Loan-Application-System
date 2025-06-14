@@ -42,7 +42,7 @@ export default function WelcomeCard() {
   return (
     <div className="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-2xl p-6 shadow-md mb-6">
       <h2 className="text-2xl font-semibold mb-1">
-        Welcome back, {fullName || user?.displayName || "User"} 👋
+        Welcome , {fullName || user?.displayName || "User"} 👋
       </h2>
       <p className="text-sm opacity-90 mb-4">
         You currently have {approvedLoanCount} approved {approvedLoanCount === 1 ? "loan" : "loans"} with us.

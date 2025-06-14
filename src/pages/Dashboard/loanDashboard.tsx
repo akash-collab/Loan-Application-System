@@ -256,3 +256,6 @@ export default function LoanDashboard() {
     </div>
   );
 }
+export function hasLoans(loans: LoansMap): boolean {
+  return Object.keys(loans).length > 0;
+}
