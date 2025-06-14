@@ -157,29 +157,33 @@ const handleDateClick = (date: Date) => {
   };
 
   return (
-    <aside className="w-full h-full flex-1 bg-white dark:bg-gray-800 p-4 rounded-xl shadow-lg overflow-y-auto">
-      {/* Calendar Section */}
-      <div className="mb-10">
-        <h2 className="text-lg font-semibold mb-2">📅 Repayment Calendar</h2>
-        {renderHeader()}
-        {renderDayLabels()}
-        {renderCells()}
-        {selectedDate && (
-          <div className="mt-4 text-sm text-indigo-300">
-            📌 Selected Date: <span className="font-semibold">{selectedDate}</span>
-            <p className="mt-1 text-xs text-gray-400">Click on <strong>Upcoming EMI</strong> dates only.</p>
-          </div>
-        )}
-      </div>
+  <aside className="w-full h-full flex-1 bg-gray-900 text-white p-4 rounded-xl shadow-lg overflow-y-auto">
+    {/* Calendar Section */}
+    <div className="mb-10">
+      <h2 className="text-lg font-semibold mb-2">📅 Repayment Calendar</h2>
+      {renderHeader()}
+      {renderDayLabels()}
+      <div className="space-y-1">{renderCells()}</div>
 
-      <hr />
-      {/* Notification Section */}
-      <div className="mt-10">
-        <h3 className="font-semibold text-sm mb-2">🔔 Recent Notifications</h3>
-        <div className="flex flex-col gap-4">
-          <NotificationList limit={5} />
+      {selectedDate && (
+        <div className="mt-4 text-sm text-indigo-300">
+          📌 Selected Date: <span className="font-semibold">{selectedDate}</span>
+          <p className="mt-1 text-xs text-gray-400">
+            Click on <strong>Upcoming EMI</strong> dates only.
+          </p>
         </div>
+      )}
+    </div>
+
+    <hr className="border-gray-700" />
+
+    {/* Notification Section */}
+    <div className="mt-10">
+      <h3 className="font-semibold text-sm mb-2">🔔 Recent Notifications</h3>
+      <div className="flex flex-col gap-4">
+        <NotificationList limit={5} />
       </div>
-    </aside>
-  );
+    </div>
+  </aside>
+);
 }

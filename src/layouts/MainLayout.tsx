@@ -6,15 +6,15 @@ import LoanActions from "../pages/Dashboard/LoanActions";
 import { Toaster } from "react-hot-toast";
 import CalendarSidebar from "../components/CalendarSidebar";
 import NotificationBell from "../components/NotificationBell";
-import NotificationList from "../components/NotificationList";
 import LoanCalculator from "../components/LoanCalculator";
+
 export default function MainLayout({ children }: { children: ReactNode }) {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100">
+    <div className="h-screen flex flex-col bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100">
       {/* Navbar */}
-      <header className="bg-white dark:bg-gray-800 shadow-md px-6 py-4 flex justify-between items-center sticky top-0 z-50">
+      <header className="bg-white dark:bg-gray-800 shadow-md px-6 py-4 flex justify-between items-center z-50 flex-shrink-0">
         <h1 className="text-xl font-bold text-indigo-600 dark:text-indigo-400">
           💼 Loan App
         </h1>
@@ -39,26 +39,30 @@ export default function MainLayout({ children }: { children: ReactNode }) {
         </nav>
       </header>
 
-      {/* Main content with equal left and right space */}
-      <main className="flex flex-1 w-full px-[5px] py-6 gap-[5px]">
-        {/* Left spacer to match right sidebar */}
-        <aside className="hidden md:flex w-[25%] flex-col h-full gap-4">
-          <LoanCalculator />
+      {/* Layout Body - This section will take up remaining vertical space */}
+      <div className="flex flex-1 w-full overflow-hidden">
+        {/* Fixed Left Sidebar */}
+        <aside className="hidden md:block w-[25%] bg-white dark:bg-gray-800 p-4 flex-shrink-0 overflow-hidden">
+          <div className="sticky top-4">
+            <LoanCalculator />
+          </div>
         </aside>
 
-        {/* Main center content (50%) */}
-        <section className="w-full md:w-[50%] bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-md">
+        {/* Scrollable Main Content */}
+        <main className="w-full md:w-[50%] bg-white dark:bg-gray-800 p-6 overflow-y-auto h-full">
           {children}
-        </section>
+        </main>
 
-        {/* Right sidebar (25%) */}
-        <aside className="hidden md:flex w-[25%] flex-col h-full gap-4">
-          <CalendarSidebar />
+        {/* Fixed Right Sidebar */}
+        <aside className="hidden md:block w-[25%] bg-white dark:bg-gray-800 p-4 flex-shrink-0 overflow-hidden">
+          <div className="sticky top-4">
+            <CalendarSidebar />
+          </div>
         </aside>
-      </main>
+      </div>
 
       {/* Footer */}
-      <footer className="bg-white dark:bg-gray-800 text-center py-4 text-xs text-gray-500 dark:text-gray-400">
+      <footer className="bg-white dark:bg-gray-800 text-center py-4 text-xs text-gray-500 dark:text-gray-400 flex-shrink-0">
         © {new Date().getFullYear()} Loan App. All rights reserved.
       </footer>
 

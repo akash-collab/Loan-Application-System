@@ -52,7 +52,7 @@ export default function LoanCalculator() {
     const isAffordable = monthlyEMI < monthlyIncome * 0.5;
 
     return (
-        <div className="bg-gray-900 text-white p-4 rounded-xl border border-gray-700 space-y-4">
+        <div className="bg-gradient-to-br from-[#1f2937] via-[#111827] to-[#0f172a] text-white p-6 rounded-2xl shadow-lg border border-gray-800 space-y-6 transition-all duration-300">
             <h3 className="text-lg font-semibold">🧮 Loan Calculator</h3>
 
             <div>
@@ -151,7 +151,7 @@ export default function LoanCalculator() {
                 <label className="text-sm">Include Insurance (₹500)</label>
             </div>
 
-            <div className="mt-4 text-sm space-y-1 bg-gray-800 p-3 rounded">
+            <div className="mt-4 text-sm space-y-1 bg-gray-800 p-4 rounded-xl shadow-inner border border-gray-700">
                 <p>📅 Monthly EMI: <strong>₹{monthlyEMI.toLocaleString()}</strong></p>
                 <p>💸 Total Interest: ₹{totalInterest.toLocaleString()}</p>
                 <p>🧾 Total Payment: ₹{totalPayment.toLocaleString()}</p>

@@ -7,6 +7,8 @@ import {
 } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { ref, set } from "firebase/database";
+import { toast } from "react-hot-toast";
+import { AtSign } from "lucide-react";
 
 export default function AuthPage() {
   const [isLogin, setIsLogin] = useState(true);
@@ -43,7 +45,13 @@ export default function AuthPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-white dark:bg-[#111829] px-4 transition-colors duration-300">
+    <div className="min-h-screen relative flex items-center justify-center px-4 bg-gradient-to-br from-indigo-800 via-purple-800 to-fuchsia-700 text-white transition-all duration-500">
+      {/* Top Center Heading */}
+      <div className="absolute top-6 left-1/2 transform -translate-x-1/2">
+        <h1 className="text-2xl font-bold tracking-wide">💼 Loan App</h1>
+      </div>
+
+      {/* Form Card */}
       <div className="bg-white dark:bg-gray-800 dark:text-white shadow-xl rounded-2xl p-8 w-full max-w-md">
         <h2 className="text-2xl font-bold text-center mb-6">
           {isLogin ? "Login to Your Account" : "Create a New Account"}
@@ -99,6 +107,29 @@ export default function AuthPage() {
           </button>
         </p>
       </div>
+
+      {/* @ Floating Icon */}
+      <button
+        onClick={() =>
+          toast(
+            `🎁 Free Demo Account\n\n📧 Email: akash@gmail.com\n🔐 Password: 123456`,
+            {
+              duration: 6000,
+              style: {
+                background: "#1f2937",
+                color: "#fff",
+                fontSize: "14px",
+                whiteSpace: "pre-line",
+                border: "1px solid #4f46e5",
+              },
+            }
+          )
+        }
+        className="absolute bottom-4 right-4 p-2 bg-gray-800 hover:bg-gray-700 rounded-full text-white shadow-lg transition"
+        aria-label="Show test credentials"
+      >
+        <AtSign className="w-5 h-5" />
+      </button>
     </div>
   );
 }
