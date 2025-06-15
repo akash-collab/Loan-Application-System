@@ -21,7 +21,7 @@ export default function App() {
           style: {
             marginTop: "4rem",
             background: "white", 
-            color: "#fff",
+            color: "black",
           },
           success: {
             iconTheme: {
