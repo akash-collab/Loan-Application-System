@@ -79,7 +79,7 @@ export default function HomePage() {
           🔒 Your data is securely stored using Firebase Authentication & Realtime Database.
         </p>
         <a
-          href="https://youtu.be/your-demo-video-id"
+          href="https://youtu.be/XXFfPRHQIQg?si=xzbS5MJqiNIQ6LYs"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-block bg-white text-indigo-700 font-semibold px-4 py-2 rounded-xl hover:bg-gray-100 transition text-sm shadow"

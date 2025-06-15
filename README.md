@@ -24,7 +24,7 @@ Click here to visit Repo
 
 Click here to visit Repo
 
-[Visit the Youtube Video](https://github.com/akash-collab/Loan-Application-System)
+[Visit the Youtube Video](https://youtu.be/XXFfPRHQIQg?si=xzbS5MJqiNIQ6LYs)
 
 ⸻
 
