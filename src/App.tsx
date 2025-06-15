@@ -19,7 +19,7 @@ export default function App() {
           duration: 5000,
           style: {
             marginTop: "4rem",
-            background: "#1f2937", // Tailwind gray-800
+            background: "white", // Tailwind gray-800
             color: "#fff",
           },
           success: {
