@@ -6,10 +6,11 @@ import {
   signInWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
+  import { getRedirectResult } from "firebase/auth";
 import { ref, set } from "firebase/database";
 import { toast } from "react-hot-toast";
 import { AtSign } from "lucide-react";
-
+import GoogleLoginButton from "../components/GoogleLoginButton";
 export default function AuthPage() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -53,6 +54,33 @@ export default function AuthPage() {
     }
   };
 
+  // Inside your AuthPage component, after useNavigate:
+  // useEffect(() => {
+  //   const handleRedirectResult = async () => {
+  //     try {
+  //       const result = await getRedirectResult(auth);
+  //       if (result?.user) {
+  //         const user = result.user;
+
+  //         await set(ref(db, `users/${user.uid}`), {
+  //           fullName: user.displayName,
+  //           email: user.email,
+  //           photoURL: user.photoURL,
+  //           provider: "google",
+  //           createdAt: Date.now(),
+  //         });
+
+  //         toast.success("Logged in with Google");
+  //         navigate("/dashboard");
+  //       }
+  //     } catch (err) {
+  //       console.error("Google login error:", err);
+  //       toast.error("Google login failed");
+  //     }
+  //   };
+
+  //   handleRedirectResult();
+  // }, []);
   return (
     <div className="min-h-screen relative flex items-center justify-center px-4 bg-gradient-to-br from-indigo-800 via-purple-800 to-fuchsia-700 text-white transition-all duration-500">
       {/* Top Center Heading */}
@@ -105,6 +133,9 @@ export default function AuthPage() {
             {isLogin ? "Login" : "Register"}
           </button>
         </form>
+
+        <div className="my-4 text-sm text-center text-gray-400">OR</div>
+        <GoogleLoginButton />
 
         <p className="text-center text-sm mt-4">
           {isLogin ? "Don't have an account?" : "Already have an account?"}{" "}
