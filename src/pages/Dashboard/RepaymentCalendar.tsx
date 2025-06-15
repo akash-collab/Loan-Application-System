@@ -143,147 +143,104 @@ export default function RepaymentCalendar() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-950 text-white px-6 py-10">
-      <div className="max-w-5xl mx-auto">
-        <div className="flex items-center justify-between mb-8">
-          <h1 className="text-3xl font-bold">📅 Repayment Calendar</h1>
-          <div className="flex gap-4">
-            <button
-              onClick={() => navigate("/history")}
-              className="bg-yellow-500 hover:bg-yellow-600 text-black font-semibold px-4 py-2 rounded-lg shadow"
-            >
-              Payment History
-            </button>
-            <button
-              onClick={() => navigate("/dashboard")}
-              className="text-sm bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-lg shadow text-white"
-            >
-              ← Dashboard
-            </button>
-          </div>
-        </div>
+    <div className="min-h-screen bg-gray-950 text-white px-4 sm:px-6 py-6 sm:py-10">
+  <div className="max-w-5xl mx-auto">
+    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+      <h1 className="text-2xl sm:text-3xl font-bold">📅 Repayment Calendar</h1>
+      <div className="flex flex-col sm:flex-row gap-2 sm:gap-4">
+        <button
+          onClick={() => navigate("/history")}
+          className="bg-yellow-500 hover:bg-yellow-600 text-black font-semibold px-4 py-2 rounded-lg shadow w-full sm:w-auto"
+        >
+          Payment History
+        </button>
+        <button
+          onClick={() => navigate("/dashboard")}
+          className="text-sm bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-lg shadow text-white w-full sm:w-auto"
+        >
+          ← Dashboard
+        </button>
+      </div>
+    </div>
 
-        {loading ? (
-          <p className="text-gray-400">Loading repayment data...</p>
-        ) : loans.length === 0 ? (
-          <div className="text-center text-gray-500 mt-20">
-            <p className="text-xl">🎉 You're all caught up!</p>
-            <p className="text-sm mt-1">No active loans requiring repayment.</p>
-          </div>
-        ) : (
-          <div className="space-y-6">
-            {loans.map((loan) => (
-              <div
-                key={loan.loanId}
-                className="bg-gray-800 rounded-2xl p-6 shadow-xl border border-gray-700"
+    {/* Loan Cards */}
+    <div className="space-y-6">
+      {loans.map((loan) => (
+        <div key={loan.loanId} className="bg-gray-800 rounded-2xl p-4 sm:p-6 shadow-xl border border-gray-700">
+          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+            <div className="space-y-1 break-words">
+              <p className="text-sm text-gray-400">
+                <span className="text-white font-semibold">Loan ID:</span> {loan.loanId}
+              </p>
+              <p className="text-sm text-gray-400">
+                <span className="text-white font-semibold">Type:</span> {loan.loanType}
+              </p>
+              <p className="text-sm text-gray-300">
+                <span className="text-yellow-400 font-medium">Next EMI:</span>{" "}
+                {loan.nextRepayment
+                  ? `${loan.nextRepayment.date} – ₹${loan.nextRepayment.amount.toLocaleString()}`
+                  : "All Paid"}
+              </p>
+              <p className="text-sm text-gray-300">
+                <span className="text-red-400 font-medium">Total Outstanding:</span>{" "}
+                ₹{loan.totalOutstanding.toLocaleString()}
+              </p>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
+              <button
+                onClick={() => setExpandedLoanId(expandedLoanId === loan.loanId ? null : loan.loanId)}
+                className="px-4 py-2 text-sm bg-blue-600 hover:bg-blue-700 rounded-lg w-full sm:w-auto"
               >
-                <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                  <div>
-                    <p className="text-sm text-gray-400">
-                      <span className="text-white font-semibold">Loan ID:</span> {loan.loanId}
-                    </p>
-                    <p className="text-sm text-gray-400 mt-1">
-                      <span className="text-white font-semibold">Type:</span> {loan.loanType}
-                    </p>
-                    <p className="text-sm mt-1 text-gray-300">
-                      <span className="text-yellow-400 font-medium">Next EMI:</span>{" "}
-                      {loan.nextRepayment
-                        ? `${loan.nextRepayment.date} – ₹${loan.nextRepayment.amount.toLocaleString()}`
-                        : "All Paid"}
-                    </p>
-                    <p className="text-sm mt-1 text-gray-300">
-                      <span className="text-red-400 font-medium">Total Outstanding:</span>{" "}
-                      ₹{loan.totalOutstanding.toLocaleString()}
-                    </p>
-                  </div>
-
-                  <div className="flex gap-3">
-                    <button
-                      onClick={() => setExpandedLoanId(expandedLoanId === loan.loanId ? null : loan.loanId)}
-                      className="px-4 py-2 text-sm bg-blue-600 hover:bg-blue-700 rounded-lg"
-                    >
-                      {expandedLoanId === loan.loanId ? "Hide EMIs" : "View EMIs"}
-                    </button>
-                    <button
-                      onClick={() => markLoanAsPaid(loan.loanId)}
-                      className="px-4 py-2 text-sm bg-green-600 hover:bg-green-700 rounded-lg"
-                    >
-                      Pay Off Loan
-                    </button>
-                  </div>
-                </div>
-
-                {expandedLoanId === loan.loanId && (
-                  <div className="mt-6 bg-gray-700 rounded-xl p-4 border border-gray-600">
-                    <ul className="space-y-2 text-sm">
-                      {loan.allRepayments.map((r, i) => {
-                        const isPastDue = r.status === "Missed";
-                        const isPaid = r.status === "Paid";
-                        return (
-                          <li
-                            key={i}
-                            className={`relative flex justify-between items-center border-b pb-2 group hover:bg-gray-500/10 rounded-md p-2 transition ${getStatusStyle(r.status)}`}
-                          >
-                            <div className="flex items-center gap-2">
-                              {getStatusIcon(r.status)}
-                              <span className={`font-medium`}>{r.status}</span>
-                            </div>
-                            <div className="flex items-center gap-4">
-                              <div className="text-gray-200">{r.date} – ₹{r.amount.toLocaleString()}</div>
-                              {!isPaid && (
-                                <button
-                                  disabled={isPastDue}
-                                  className={`px-2 py-1 text-xs rounded ${isPastDue ? "bg-gray-600 cursor-not-allowed" : "bg-green-600 hover:bg-green-700"}`}
-                                  onClick={() => paySingleEMI(loan.loanId, r.id!)}
-                                >
-                                  Pay EMI
-                                </button>
-                              )}
-                            </div>
-                          </li>
-                        );
-                      })}
-                    </ul>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        )}
-
-        {showPaidLoans && paidLoans.length > 0 && (
-          <div className="mt-10 space-y-6">
-            <h2 className="text-2xl font-semibold text-green-400">📘 Payment History</h2>
-            {paidLoans.map((loan) => (
-              <div
-                key={loan.loanId}
-                className="bg-gray-800 rounded-2xl p-6 shadow border border-gray-700"
+                {expandedLoanId === loan.loanId ? "Hide EMIs" : "View EMIs"}
+              </button>
+              <button
+                onClick={() => markLoanAsPaid(loan.loanId)}
+                className="px-4 py-2 text-sm bg-green-600 hover:bg-green-700 rounded-lg w-full sm:w-auto"
               >
-                <p className="text-white font-semibold mb-4">Loan ID: {loan.loanId}</p>
-                <p className="text-sm text-gray-400 mt-1">
-                  <span className="text-white font-semibold">Type:</span> {loan.loanType}
-                </p>
-                <ul className="space-y-2 text-sm">
-                  {loan.allRepayments.map((r, i) => (
+                Pay Off Loan
+              </button>
+            </div>
+          </div>
+
+          {/* Repayment Breakdown */}
+          {expandedLoanId === loan.loanId && (
+            <div className="mt-4 sm:mt-6 bg-gray-700 rounded-xl p-3 sm:p-4 border border-gray-600 overflow-x-auto">
+              <ul className="space-y-2 text-sm">
+                {loan.allRepayments.map((r, i) => {
+                  const isPastDue = r.status === "Missed";
+                  const isPaid = r.status === "Paid";
+                  return (
                     <li
                       key={i}
-                      className="flex justify-between items-center border-b border-gray-600 pb-1"
+                      className={`flex flex-col sm:flex-row sm:justify-between sm:items-center border-b pb-2 group hover:bg-gray-500/10 rounded-md p-2 transition ${getStatusStyle(r.status)}`}
                     >
                       <div className="flex items-center gap-2">
                         {getStatusIcon(r.status)}
-                        <span className={`font-medium ${getStatusStyle(r.status)}`}>{r.status}</span>
+                        <span className="font-medium">{r.status}</span>
                       </div>
-                      <div className="text-gray-300">
-                        {r.date} – ₹{r.amount.toLocaleString()}
+                      <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 mt-1 sm:mt-0">
+                        <div className="text-gray-200">{r.date} – ₹{r.amount.toLocaleString()}</div>
+                        {!isPaid && (
+                          <button
+                            disabled={isPastDue}
+                            className={`px-2 py-1 text-xs rounded ${isPastDue ? "bg-gray-600 cursor-not-allowed" : "bg-green-600 hover:bg-green-700"}`}
+                            onClick={() => paySingleEMI(loan.loanId, r.id!)}
+                          >
+                            Pay EMI
+                          </button>
+                        )}
                       </div>
                     </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
+                  );
+                })}
+              </ul>
+            </div>
+          )}
+        </div>
+      ))}
     </div>
+  </div>
+</div>
   );
 }
