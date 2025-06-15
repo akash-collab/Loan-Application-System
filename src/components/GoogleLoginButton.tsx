@@ -23,11 +23,11 @@ export default function GoogleLoginButton() {
         createdAt: Date.now(),
       });
 
-      toast.success("Logged in with Google");
+    //   toast.success("Logged in with Google");
       navigate("/dashboard");
     } catch (err: any) {
       console.error("Google login error:", err);
-      toast.error("Google login failed");
+    //   toast.error("Google login failed");
     }
   };
 
