@@ -6,6 +6,7 @@ import LoanForm from "./features/loanApplication/LoanForm";
 import { Toaster } from "react-hot-toast";
 import RepaymentCalendar from "./pages/Dashboard/RepaymentCalendar";
 import PaymentHistory from "./pages/Dashboard/PaymentHistory";
+import HomePage from "./pages/HomePage";
 
 export default function App() {
   const { user } = useAuth();
@@ -19,26 +20,25 @@ export default function App() {
           duration: 5000,
           style: {
             marginTop: "4rem",
-            background: "white", // Tailwind gray-800
+            background: "white", 
             color: "#fff",
           },
           success: {
             iconTheme: {
               primary: "#10b981",
-              secondary: "#fff",
+              secondary: "black",
             },
           },
         }}
       />
     <Routes>
-      <Route path="/" element={<Navigate to={user ? "/dashboard" : "/auth"} />} />
-      <Route path="/apply" element={<LoanForm />} />
-        {/* <Route path="/dashboard" element={<Dashboard />} /> */}
-      <Route path="/auth" element={<AuthPage />} />
-      <Route path="/dashboard" element={user ? <DashboardPage /> : <Navigate to="/auth" />} />
-      <Route path="/calendar" element={<RepaymentCalendar />} />
-      <Route path="/history" element={<PaymentHistory />} />
-    </Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/auth" element={<AuthPage />} />
+        <Route path="/apply" element={<LoanForm />} />
+        <Route path="/dashboard" element={user ? <DashboardPage /> : <Navigate to="/" />} />
+        <Route path="/calendar" element={<RepaymentCalendar />} />
+        <Route path="/history" element={<PaymentHistory />} />
+      </Routes>
     </>
   );
 }

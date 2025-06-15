@@ -1,22 +1,31 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { auth, db } from "../services/firebase";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
 import { ref, set } from "firebase/database";
 import { toast } from "react-hot-toast";
 import { AtSign } from "lucide-react";
 
 export default function AuthPage() {
-  const [isLogin, setIsLogin] = useState(true);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+
+  const [isLogin, setIsLogin] = useState(true); // default login mode
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const navigate = useNavigate();
+
+  // Sync mode from query param
+  useEffect(() => {
+    const mode = queryParams.get("mode");
+    setIsLogin(mode !== "register"); // if mode is "register", then isLogin = false
+  }, [location.search]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -116,8 +125,8 @@ export default function AuthPage() {
             {
               duration: 6000,
               style: {
-                background: "#1f2937",
-                color: "#fff",
+                background: "#facc15",
+                color: "#000",
                 fontSize: "14px",
                 whiteSpace: "pre-line",
                 border: "1px solid #4f46e5",
@@ -125,7 +134,7 @@ export default function AuthPage() {
             }
           )
         }
-        className="absolute bottom-4 right-4 p-2 bg-gray-800 hover:bg-gray-700 rounded-full text-white shadow-lg transition"
+        className="absolute bottom-4 right-4 p-2 bg-yellow-400 hover:bg-yellow-300 rounded-full text-black shadow-lg transition"
         aria-label="Show test credentials"
       >
         <AtSign className="w-5 h-5" />
