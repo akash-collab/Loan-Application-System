@@ -53,7 +53,7 @@ export default function HomePage() {
         <div className="flex flex-col sm:flex-row gap-6 justify-center">
           <div className="flex flex-col items-center">
             <img
-              src="/assets/Screenshots/Dashboard.png"
+              src="/assets/Screenshots/Dashboard.webp"
               alt="Dashboard"
               className="rounded-lg shadow-lg w-full max-w-[260px] h-40 object-cover"
             />
@@ -61,7 +61,7 @@ export default function HomePage() {
           </div>
           <div className="flex flex-col items-center">
             <img
-              src="/assets/Screenshots/RepaymentCalendar.png"
+              src="/assets/Screenshots/RepaymentCalendar.webp"
               alt="Repayment Calendar"
               className="rounded-lg shadow-lg w-full max-w-[260px] h-40 object-cover"
             />
