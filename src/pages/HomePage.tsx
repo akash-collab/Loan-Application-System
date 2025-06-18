@@ -26,12 +26,6 @@ export default function HomePage() {
           >
             🆕 Register
           </button>
-          <button
-            onClick={() => navigate("/chatbot")}
-            className="bg-green-400 text-black font-semibold px-6 py-3 rounded-xl hover:bg-green-500 transition text-lg shadow w-full sm:w-auto"
-          >
-            💬 Chatbot
-          </button>
         </div>
       </section>
 

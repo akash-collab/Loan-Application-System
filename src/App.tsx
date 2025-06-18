@@ -13,7 +13,7 @@ export default function App() {
 
   return (
     <>
-    <Toaster
+      <Toaster
         position="top-right"
         gutter={12}
         toastOptions={{
@@ -31,7 +31,7 @@ export default function App() {
           },
         }}
       />
-    <Routes>
+      <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/auth" element={<AuthPage />} />
         <Route path="/apply" element={<LoanForm />} />

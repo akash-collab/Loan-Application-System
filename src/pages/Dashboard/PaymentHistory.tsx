@@ -67,7 +67,7 @@ export default function PaymentHistory() {
     return date.toLocaleString("default", { month: "long", year: "numeric" });
   };
 
-  const handleDownload = (loan: LoanHistory) => {
+  const handleDownload = async (loan: LoanHistory) => {
     generateLoanStatement({
       userName: user?.displayName || "User",
       loanId: loan.loanId,
