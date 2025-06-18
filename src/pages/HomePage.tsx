@@ -5,7 +5,7 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-start bg-gradient-to-br from-indigo-800 via-purple-800 to-fuchsia-700 text-white px-4 py-8 lg:space-y-16 space-y-12 overflow-y-auto">
-      
+
       {/* Hero Section */}
       <section className="text-center space-y-6 px-4">
         <h1 className="text-4xl md:text-5xl font-bold">💼 Welcome to Loan App</h1>
@@ -25,6 +25,12 @@ export default function HomePage() {
             className="bg-yellow-400 text-black font-semibold px-6 py-3 rounded-xl hover:bg-yellow-500 transition text-lg shadow w-full sm:w-auto"
           >
             🆕 Register
+          </button>
+          <button
+            onClick={() => navigate("/chatbot")}
+            className="bg-green-400 text-black font-semibold px-6 py-3 rounded-xl hover:bg-green-500 transition text-lg shadow w-full sm:w-auto"
+          >
+            💬 Chatbot
           </button>
         </div>
       </section>
