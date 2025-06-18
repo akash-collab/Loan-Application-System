@@ -1,5 +1,3 @@
-// src/layouts/MainLayout.tsx
-
 import { ReactNode, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
@@ -10,6 +8,8 @@ import NotificationBell from "../components/NotificationBell";
 import LoanCalculator from "../components/LoanCalculator";
 import NotificationList from "../components/NotificationList";
 import { Menu, ChevronDown, ChevronUp } from "lucide-react";
+import ChatBot from "../components/ChatBot";
+import Modal from "../components/Modal";
 
 export default function MainLayout({ children }: { children: ReactNode }) {
   const navigate = useNavigate();
@@ -17,6 +17,7 @@ export default function MainLayout({ children }: { children: ReactNode }) {
   const [showCalculator, setShowCalculator] = useState(false);
   const [showCalendar, setShowCalendar] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
+  const [chatOpen, setChatOpen] = useState(false);
 
   return (
     <div className="h-screen flex flex-col bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100">
@@ -33,11 +34,25 @@ export default function MainLayout({ children }: { children: ReactNode }) {
         </div>
 
         <nav className="flex items-center gap-3 text-sm">
+          {/* Mobile navbar */}
           <div className="md:hidden flex items-center gap-4">
-            {/* <NotificationBell /> */}
+            <button
+              onClick={() => setChatOpen(true)}
+              className="bg-white text-indigo-700 font-semibold px-3 py-1.5 rounded-md hover:bg-gray-200 transition"
+            >
+              💬 Support
+            </button>
             <LogoutButton />
           </div>
+
+          {/* Desktop navbar */}
           <div className="hidden md:flex items-center gap-3">
+            <button
+              onClick={() => setChatOpen(true)}
+              className="bg-white text-indigo-700 font-semibold px-3 py-1.5 rounded-md hover:bg-gray-200 transition"
+            >
+              💬 Support
+            </button>
             <button
               onClick={() => navigate("/history")}
               className="bg-yellow-500 hover:bg-yellow-600 text-black font-semibold px-4 py-2 rounded-lg transition"
@@ -56,6 +71,11 @@ export default function MainLayout({ children }: { children: ReactNode }) {
           </div>
         </nav>
       </header>
+
+      {/* Chatbot modal using improved Modal.tsx */}
+      <Modal isOpen={chatOpen} onClose={() => setChatOpen(false)}>
+        <ChatBot onClose={() => setChatOpen(false)} />
+      </Modal>
 
       {/* Mobile Sidebar */}
       {sidebarOpen && (
@@ -119,19 +139,19 @@ export default function MainLayout({ children }: { children: ReactNode }) {
 
       {/* Main layout */}
       <div className="flex-1 flex flex-col md:flex-row overflow-hidden">
-        {/* Left Sidebar (fixed in desktop) */}
+        {/* Left Sidebar (desktop) */}
         <aside className="hidden md:flex w-[25%] bg-white dark:bg-gray-800 p-4">
           <div className="sticky top-20 h-fit w-full">
             <LoanCalculator />
           </div>
         </aside>
 
-        {/* Center Content (scrollable in desktop) */}
+        {/* Main Content */}
         <main className="w-full md:w-[50%] bg-white dark:bg-gray-800 px-4 py-6 overflow-y-auto h-full">
           {children}
         </main>
 
-        {/* Right Sidebar (fixed in desktop) */}
+        {/* Right Sidebar (desktop) */}
         <aside className="hidden md:flex w-[25%] bg-white dark:bg-gray-800 p-4">
           <div className="sticky top-20 h-fit w-full">
             <CalendarSidebar />
