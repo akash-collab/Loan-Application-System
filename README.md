@@ -8,7 +8,7 @@ A fully responsive, dark-mode-friendly, Firebase-powered Loan Application System
 
 Click here to visit the deployed site
 
-[Visit the Loan App Demo](loan-application-system-lovat.vercel.app)
+[Visit the Loan App Demo](https://loan-application-system-lovat.vercel.app/)
 
 ⸻
 
